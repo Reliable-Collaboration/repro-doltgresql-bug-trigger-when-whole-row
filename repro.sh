@@ -45,7 +45,7 @@ wait_until_ready() { # container: answers over TCP twice in a row
 }
 
 run() { # container, output file
-  docker cp repro.sql "$1:/tmp/repro.sql"
+  docker cp repro.sql "$1:/tmp/repro.sql" >/dev/null 2>&1 || { echo "Could not copy repro.sql into $1" >&2; exit 2; }
   # -t gives psql a terminal, so each error is printed right after the statement that caused it.
   docker exec -t -e PGPASSWORD=password "$1" \
     psql -X -P pager=off -h 127.0.0.1 -U postgres -d postgres --echo-all -f /tmp/repro.sql | tr -d '\r' > "$2"
