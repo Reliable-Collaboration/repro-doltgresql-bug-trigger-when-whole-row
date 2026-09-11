@@ -10,6 +10,8 @@ ERROR:  record "old" has no field "*"
 
 PostgreSQL 18.6 evaluates the same clause, runs the trigger, and updates the row.
 
+Reported upstream: https://github.com/dolthub/doltgresql/issues/3336
+
 ## Reproduce it
 
 You need Docker and a POSIX shell: Linux, macOS, or Windows with WSL. The first run downloads the images.
